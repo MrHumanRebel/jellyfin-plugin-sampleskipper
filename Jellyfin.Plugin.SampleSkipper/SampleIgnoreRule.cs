@@ -1,39 +1,25 @@
 using System;
-using MediaBrowser.Controller.Resolvers;
-using MediaBrowser.Model.IO;
-using Microsoft.Extensions.Logging;
+using MediaBrowser.Common.Plugins;
+using MediaBrowser.Common.ApplicationHost;
+using MediaBrowser.Common.Configuration;
 
 namespace Jellyfin.Plugin.SampleSkipper
 {
-    public class SampleIgnoreRule : IResolverIgnoreRule
+    public class Plugin : BasePlugin
     {
-        private readonly ILogger<SampleIgnoreRule> _logger;
+        // Egyedi azonosító a plugin számára
+        public override Guid Id => Guid.Parse("a4f5d6e7-1b2c-4d3e-5f6g-7h8i9j0k1l2m");
 
-        public SampleIgnoreRule(ILogger<SampleIgnoreRule> logger)
+        public override string Name => "Sample Skipper";
+
+        public override string Description => "Figyelmen kívül hagyja a 'sample' szót tartalmazó videofájlokat.";
+
+        public static Plugin Instance { get; private set; }
+
+        public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer) 
+            : base(applicationPaths, xmlSerializer)
         {
-            _logger = logger;
-        }
-
-        public bool ShouldIgnore(FileSystemMetadata fileInfo, string parentPath)
-        {
-            // If it's a directory, we generally don't ignore it unless the directory itself is named sample
-            // But usually samples are files inside a folder. 
-            
-            if (fileInfo.IsDirectory)
-            {
-                // Optional: Uncomment below if you want to ignore entire folders named "Sample"
-                // return fileInfo.Name.Contains("sample", StringComparison.OrdinalIgnoreCase);
-                return false;
-            }
-
-            // Check if the filename contains "sample" (Case Insensitive)
-            if (fileInfo.Name.Contains("sample", StringComparison.OrdinalIgnoreCase))
-            {
-                _logger.LogInformation($"[SampleSkipper] Ignoring file: {fileInfo.FullName}");
-                return true;
-            }
-
-            return false;
+            Instance = this;
         }
     }
 }
