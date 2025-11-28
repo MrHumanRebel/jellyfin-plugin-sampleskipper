@@ -15,10 +15,10 @@ namespace Jellyfin.Plugin.SampleSkipper
 
         public static Plugin Instance { get; private set; }
 
-        // FIX: The BasePlugin constructor in Jellyfin 10.11.3 no longer requires IXmlSerializer.
-        // We only pass IApplicationPaths to the base class.
+        // FIX: In Jellyfin 10.11.3, BasePlugin likely has a parameterless constructor.
+        // We pass no arguments to base(), but we can still keep dependencies in our constructor for future use.
         public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer) 
-            : base(applicationPaths) 
+            : base() 
         {
             Instance = this;
         }
