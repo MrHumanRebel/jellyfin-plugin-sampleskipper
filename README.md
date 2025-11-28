@@ -68,7 +68,7 @@ No more manual cleanup or cluttered folders — if a file has `sample` in its na
 
 ### Requirements
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/)
+- [.NET 9.0.10 SDK](https://dotnet.microsoft.com/)
 
 ### Steps
 
