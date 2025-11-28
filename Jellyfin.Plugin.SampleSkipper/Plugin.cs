@@ -6,7 +6,7 @@ using MediaBrowser.Model.Plugins;
 
 namespace Jellyfin.Plugin.SampleSkipper
 {
-    public class Plugin : BasePlugin
+    public class Plugin : BasePlugin<PluginConfiguration>
     {
         // This must match the GUID in manifest.json!
         public override Guid Id => Guid.Parse("5826df63-32c0-4822-9218-403d67f5370d");
