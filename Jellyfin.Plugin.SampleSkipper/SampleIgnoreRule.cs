@@ -17,9 +17,6 @@ namespace Jellyfin.Plugin.SampleSkipper
 
         public bool ShouldIgnore(FileSystemMetadata fileInfo, BaseItem parent)
         {
-            bool nameHasSample = fileInfo.Name.Contains("sample", StringComparison.OrdinalIgnoreCase);
-            bool pathHasSample = (fileInfo.FullName ?? string.Empty).Contains("sample", StringComparison.OrdinalIgnoreCase);
-
             if (fileInfo.IsDirectory)
             {
                 if (nameHasSample)
@@ -31,7 +28,7 @@ namespace Jellyfin.Plugin.SampleSkipper
                 return false;
             }
 
-            if (nameHasSample || pathHasSample)
+            if (fileInfo.Name.Contains("sample", StringComparison.OrdinalIgnoreCase))
             {
                 _logger.LogInformation("[SampleSkipper] Ignoring file: {Path}", fileInfo.FullName);
                 return true;
