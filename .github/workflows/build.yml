@@ -3,9 +3,8 @@ name: Build and Release Plugin
 on:
   push:
     tags:
-      - 'v*' # Trigger on tags like v1.0.0
+      - 'v*' # Csak akkor fut le, ha pl. v1.0.1 taget pusholsz
 
-# JAVÍTÁS: Jogosultságot adunk a Release létrehozásához
 permissions:
   contents: write
 
@@ -14,31 +13,63 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Kód letöltése
       uses: actions/checkout@v3
 
-    - name: Setup .NET
+    - name: .NET 9 beállítása
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '9.0.x'
 
-    - name: Restore Dependencies
+    - name: Függőségek visszaállítása
       run: dotnet restore Jellyfin.Plugin.SampleSkipper/Jellyfin.Plugin.SampleSkipper.csproj
 
-    - name: Build Release
+    - name: Build (Release mód)
       run: dotnet build Jellyfin.Plugin.SampleSkipper/Jellyfin.Plugin.SampleSkipper.csproj --configuration Release --no-restore
 
     - name: Publish
       run: dotnet publish Jellyfin.Plugin.SampleSkipper/Jellyfin.Plugin.SampleSkipper.csproj --configuration Release --no-build --output ./publish
 
-    - name: Zip the Plugin
-      # JAVÍTÁS: Csak a saját DLL-ünket csomagoljuk be, hogy kicsi legyen a méret
+    - name: ZIP készítése (Csak a lényeges DLL-ekkel)
       run: |
         cd publish
         zip -r ../SampleSkipper.zip Jellyfin.Plugin.SampleSkipper.dll Jellyfin.Plugin.SampleSkipper.pdb
         cd ..
 
-    - name: Create Release
+    - name: MD5 Checksum kiszámolása és Manifest frissítése
+      run: |
+        # 1. MD5 hash kiszámolása
+        MD5_HASH=$(md5sum SampleSkipper.zip | awk '{print $1}')
+        echo "Kiszámolt MD5: $MD5_HASH"
+
+        # 2. Változók beállítása
+        VERSION=${{ github.ref_name }} # pl. v1.0.0
+        # URL összerakása a verziószám alapján
+        DOWNLOAD_URL="https://github.com/${{ github.repository }}/releases/download/$VERSION/SampleSkipper.zip"
+        # Jelenlegi idő UTC-ben (ISO 8601 formátum)
+        TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+        # 3. manifest.json frissítése a jq eszközzel
+        # Ez a parancs beírja a checksumot, az url-t és az időt a JSON-be
+        jq --arg checksum "$MD5_HASH" \
+           --arg url "$DOWNLOAD_URL" \
+           --arg timestamp "$TIMESTAMP" \
+           '.[0].versions[0].checksum = $checksum | .[0].versions[0].sourceUrl = $url | .[0].versions[0].timestamp = $timestamp' \
+           manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+
+        # Ellenőrzésképp kiírjuk a logba
+        cat manifest.json
+
+    - name: Frissített Manifest visszaküldése (Commit & Push)
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add manifest.json
+        git commit -m "Auto-update manifest.json with checksum and timestamp for ${{ github.ref_name }}"
+        # A 'main' branch-re pusholunk (ha a te fő ágad neve 'master', írd át azt!)
+        git push origin HEAD:main
+
+    - name: Release létrehozása
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
