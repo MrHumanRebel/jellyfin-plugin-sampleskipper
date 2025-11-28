@@ -1,7 +1,7 @@
 using System;
-using MediaBrowser.Common.Plugins;
-using MediaBrowser.Common.ApplicationHost;
 using MediaBrowser.Common.Configuration;
+using MediaBrowser.Common.Plugins;
+using MediaBrowser.Model.Serialization;
 
 namespace Jellyfin.Plugin.SampleSkipper
 {
