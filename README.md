@@ -1,79 +1,75 @@
 <div align="center">
 
-Jellyfin Sample Skipper
+# Jellyfin Sample Skipper
 
-A lightweight, automated plugin for Jellyfin that keeps your library clean.
+*A lightweight, automated plugin for Jellyfin that keeps your library clean.*
 
 </div>
 
-✨ Overview
+---
 
-Sample Skipper is a simple yet powerful plugin designed to automatically detect and ignore "sample" video files during library scans. No more manual cleanup or cluttered folders—if a file has "sample" in its name, this plugin ensures it never reaches your Jellyfin library.
+## ✨ Overview
 
-🚀 Features
+Sample Skipper is a simple yet powerful plugin designed to automatically detect and ignore **"sample" video files** during library scans.  
 
-Automatic Detection: seamless integration with the Jellyfin library scanner.
+No more manual cleanup or cluttered folders — if a file has `sample` in its name, this plugin ensures it never reaches your Jellyfin library.
 
-Case Insensitive: detects sample, Sample, SAMPLE, or any variation.
+---
 
-Zero Config: install it and forget it; it works out of the box.
+## 🚀 Features
 
-Lightweight: minimal impact on scan performance.
+- **Automatic Detection** – Seamless integration with the Jellyfin library scanner.  
+- **Case Insensitive** – Detects `sample`, `Sample`, `SAMPLE`, or any variation.  
+- **Zero Config** – Install it and forget it; it works out of the box.  
+- **Lightweight** – Minimal impact on scan performance.  
 
-📦 Installation
+---
 
-Option 1: Official Repository (Recommended)
+## 📦 Installation
 
-Open your Jellyfin Dashboard.
+### Option 1: Official Repository (Recommended)
 
-Navigate to Plugins -> Repositories.
+1. Open your **Jellyfin Dashboard**.  
+2. Navigate to **Plugins → Repositories**.  
+3. Click **(+) Add Repository**.  
+4. Enter the following details:
 
-Click (+) Add Repository.
+   - **Name:** `Sample Skipper Repo`  
+   - **URL:**  
+     `https://raw.githubusercontent.com/MrHumanRebel/jellyfin-plugin-sampleskipper/main/manifest.json`
 
-Enter the following details:
+5. Go to the **Catalog** tab, find **Sample Skipper**, and click **Install**.  
+6. **Restart Jellyfin** to load the plugin.
 
-Name: Sample Skipper Repo
+---
 
-URL: https://raw.githubusercontent.com/MrHumanRebel/jellyfin-plugin-sampleskipper/main/manifest.json
+### Option 2: Manual Installation
 
-Go to the Catalog tab, find Sample Skipper, and click Install.
+1. Download the latest `.zip` release from the **Releases** page.  
+2. Extract the `Jellyfin.Plugin.SampleSkipper.dll` file.  
+3. Place the file into your Jellyfin plugins folder:
 
-Restart Jellyfin to load the plugin.
+   - **Linux:** `/var/lib/jellyfin/plugins/`  
+   - **Windows:** `%ProgramData%\Jellyfin\Server\plugins\`
 
-Option 2: Manual Installation
+4. **Restart** the Jellyfin server.
 
-Download the latest .zip release from the Releases Page.
+---
 
-Extract the Jellyfin.Plugin.SampleSkipper.dll file.
+## 🛠️ Building from Source
 
-Place the file into your Jellyfin plugins folder (usually /var/lib/jellyfin/plugins/ on Linux or %ProgramData%\Jellyfin\Server\plugins\ on Windows).
+### Requirements
 
-Restart the Jellyfin server.
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/)
 
-🛠️ Building from Source
+### Steps
 
-Requirements:
-
-.NET 9.0 SDK
-
+```bash
 # Clone the repository
-git clone [https://github.com/MrHumanRebel/jellyfin-plugin-sampleskipper.git](https://github.com/MrHumanRebel/jellyfin-plugin-sampleskipper.git)
+git clone https://github.com/MrHumanRebel/jellyfin-plugin-sampleskipper.git
 
 # Enter the directory
 cd jellyfin-plugin-sampleskipper
 
 # Build the project
 dotnet build Jellyfin.Plugin.SampleSkipper/Jellyfin.Plugin.SampleSkipper.csproj --configuration Release
-
-
-🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-
-📄 License
-
-Distributed under the MIT License. See LICENSE for more information.
-
-<div align="center">
-<sub>Made with ❤️ for the Jellyfin Community</sub>
-</div>
