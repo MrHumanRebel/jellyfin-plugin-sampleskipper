@@ -1,4 +1,5 @@
 using System;
+using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Resolvers;
 using MediaBrowser.Model.IO;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ namespace Jellyfin.Plugin.SampleSkipper
             _logger = logger;
         }
 
-        public bool ShouldIgnore(FileSystemMetadata fileInfo, string parentPath)
+        public bool ShouldIgnore(FileSystemMetadata fileInfo, BaseItem parent)
         {
             // We usually don't want to skip directories, unless specified
             if (fileInfo.IsDirectory)
