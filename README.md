@@ -73,3 +73,17 @@ cd jellyfin-plugin-sampleskipper
 
 # Build the project
 dotnet build Jellyfin.Plugin.SampleSkipper/Jellyfin.Plugin.SampleSkipper.csproj --configuration Release
+```
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+Feel free to check the issues page.
+
+## 📄 License
+
+Distributed under the MIT License.
+See LICENSE for more information.
+
+## Made with ❤️ for the Jellyfin Community
+
+
