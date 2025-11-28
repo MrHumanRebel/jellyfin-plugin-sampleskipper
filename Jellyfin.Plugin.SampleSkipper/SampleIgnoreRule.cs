@@ -16,16 +16,16 @@ namespace Jellyfin.Plugin.SampleSkipper
 
         public bool ShouldIgnore(FileSystemMetadata fileInfo, string parentPath)
         {
-            // Könyvtárakat alapból nem hagyunk ki, hacsak nem akarod
+            // We usually don't want to skip directories, unless specified
             if (fileInfo.IsDirectory)
             {
                 return false;
             }
 
-            // Ellenőrzi, hogy a fájlnév tartalmazza-e a "sample" szót (kis/nagybetű nem számít)
+            // Check if the filename contains "sample" (Case Insensitive)
             if (fileInfo.Name.Contains("sample", StringComparison.OrdinalIgnoreCase))
             {
-                _logger.LogInformation($"[SampleSkipper] Fájl kihagyása: {fileInfo.FullName}");
+                _logger.LogInformation($"[SampleSkipper] Ignoring file: {fileInfo.FullName}");
                 return true;
             }
 
