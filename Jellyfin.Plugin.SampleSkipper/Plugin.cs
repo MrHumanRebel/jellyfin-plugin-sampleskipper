@@ -7,7 +7,7 @@ namespace Jellyfin.Plugin.SampleSkipper
 {
     public class Plugin : BasePlugin
     {
-        public override Guid Id => Guid.Parse("a4f5d6e7-1b2c-4d3e-5f6g-7h8i9j0k1l2m");
+        public override Guid Id => Guid.Parse("5826df63-32c0-4822-9218-403d67f5370d");
 
         public override string Name => "Sample Skipper";
 
