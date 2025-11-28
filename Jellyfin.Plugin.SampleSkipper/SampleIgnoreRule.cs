@@ -17,16 +17,14 @@ namespace Jellyfin.Plugin.SampleSkipper
 
         public bool ShouldIgnore(FileSystemMetadata fileInfo, BaseItem parent)
         {
-            // We usually don't want to skip directories, unless specified
             if (fileInfo.IsDirectory)
             {
                 return false;
             }
 
-            // Check if the filename contains "sample" (Case Insensitive)
             if (fileInfo.Name.Contains("sample", StringComparison.OrdinalIgnoreCase))
             {
-                _logger.LogInformation($"[SampleSkipper] Ignoring file: {fileInfo.FullName}");
+                _logger.LogInformation("[SampleSkipper] Ignoring file: {Path}", fileInfo.FullName);
                 return true;
             }
 
