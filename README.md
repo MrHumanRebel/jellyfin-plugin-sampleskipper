@@ -6,7 +6,7 @@
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/MrHumanRebel/jellyfin_plugin_sampleskipper/main/sampleskipper.png"
+    src="https://raw.githubusercontent.com/MrHumanRebel/jellyfin-plugin-sampleskipper/main/sampleskipper.png"
     alt="Sample Skipper Banner"
     width="200"
   />
