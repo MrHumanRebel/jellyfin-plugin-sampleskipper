@@ -8,7 +8,7 @@
     <Authors>MrHumanRebel</Authors>
     <Company>MrHumanRebel</Company>
     <Product>Jellyfin Sample Skipper</Product>
-    <Description>Automatikusan figyelmen kívül hagyja a "sample" tartalmú fájlokat.</Description>
+    <Description>Automatically ignores files containing "sample" in the filename.</Description>
     <PackageId>Jellyfin.Plugin.SampleSkipper</PackageId>
   </PropertyGroup>
 
