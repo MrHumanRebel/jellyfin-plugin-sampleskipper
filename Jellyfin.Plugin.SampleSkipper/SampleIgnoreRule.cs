@@ -19,6 +19,12 @@ namespace Jellyfin.Plugin.SampleSkipper
         {
             if (fileInfo.IsDirectory)
             {
+                if (nameHasSample)
+                {
+                    _logger.LogInformation("[SampleSkipper] Ignoring directory: {Path}", fileInfo.FullName);
+                    return true;
+                }
+
                 return false;
             }
 
