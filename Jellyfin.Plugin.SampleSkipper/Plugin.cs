@@ -26,14 +26,15 @@ namespace Jellyfin.Plugin.SampleSkipper
         // FIX: We override GetPluginInfo to avoid BasePlugin crash in 10.11.x
         public override PluginInfo GetPluginInfo()
         {
-            return new PluginInfo
-            {
-                Name = this.Name,
-                Version = this.Version,
-                CanUninstall = true, // Enable uninstallation
-                Description = this.Description,
-                Id = this.Id
-            };
+            // Jellyfin 10.11.x PluginInfo constructor requires specific arguments in order:
+            // (string name, Version version, string description, Guid id, bool canUninstall)
+            return new PluginInfo(
+                this.Name,
+                this.Version,
+                this.Description,
+                this.Id,
+                true
+            );
         }
     }
 }
