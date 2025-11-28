@@ -1,14 +1,8 @@
-<div align="center">
-
 # Jellyfin Sample Skipper
 
 *A lightweight, automated plugin for Jellyfin that keeps your library clean.*
 
-<div align="center">
-<img src="https://raw.githubusercontent.com/MrHumanRebel/jellyfin_plugin_sampleskipper/main/sampleskipper.png" style="max-width: 200px; width: 100%; height: auto;" alt="Sample Skipper Banner">
-</div>
-
-</div>
+![Sample Skipper Banner](https://raw.githubusercontent.com/MrHumanRebel/jellyfin_plugin_sampleskipper/main/sampleskipper.png)
 
 ---
 
